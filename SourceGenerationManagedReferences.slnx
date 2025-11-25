@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="src/SourceGenerationManagedReferences/SourceGenerationManagedReferences.csproj" />
+  <Folder Name="/Samples/">
+    <Project Path="samples/PackageReferencedGenerator/PackageReferencedGenerator.csproj" />
+    <Project Path="samples/ProjectReferencedGenerator/ProjectReferencedGenerator.csproj" />
+  </Folder>
+  <Project Path="src/SourceGenerationManagedReferences.Dependencies/SourceGenerationManagedReferences.Dependencies.csproj" />
+</Solution>

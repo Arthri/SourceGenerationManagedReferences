@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Add dependencies here -->
+    <PackageReference Include="System.Text.Json" Version="10.0.0" />
+  </ItemGroup>
+
+  <Target Name="SetTargetPathToDependencies" DependsOnTargets="ResolvePackageAssets" AfterTargets="GetTargetPathWithTargetPlatformMoniker">
+    <ItemGroup>
+      <!--
+        Mark useless primary build output for removal.
+        For some reason Visual Studio takes issue if this is missing.
+      -->
+      <TargetPathWithTargetPlatformMoniker Condition="'%(Identity)' == '$(TargetPath)'">
+        <_REMOVE_THIS>true</_REMOVE_THIS>
+      </TargetPathWithTargetPlatformMoniker>
+      <!-- Set NuGet references as the primary output -->
+      <TargetPathWithTargetPlatformMoniker Include="@(RuntimeCopyLocalItems);@(ReferenceCopyLocalPaths)">
+        <CopyUpToDateMarker>@(CopyUpToDateMarker)</CopyUpToDateMarker>
+        <Private>true</Private>
+      </TargetPathWithTargetPlatformMoniker>
+    </ItemGroup>
+  </Target>
+
+</Project>
